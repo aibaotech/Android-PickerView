@@ -4,17 +4,17 @@
   -->
 
 <resources>
-    <dimen name="pwk_keyboard_key_height">45dp</dimen>
+    <dimen name="pwk_keyboard_key_height">36dp</dimen>
     <dimen name="pwk_keyboard_padding_top">8dp</dimen>
-    <dimen name="pwk_keyboard_padding_bottom">3dp</dimen>
-    <dimen name="pwk_keyboard_padding_left">3dp</dimen>
-    <dimen name="pwk_keyboard_padding_right">3dp</dimen>
-    <dimen name="pwk_keyboard_key_space_vertical">8dp</dimen>
+    <dimen name="pwk_keyboard_padding_bottom">5dp</dimen>
+    <dimen name="pwk_keyboard_padding_left">8dp</dimen>
+    <dimen name="pwk_keyboard_padding_right">8dp</dimen>
+    <dimen name="pwk_keyboard_key_space_vertical">5dp</dimen>
     <dimen name="pwk_keyboard_key_space_horizontal">4dp</dimen>
     <dimen name="pwk_keyboard_bubble_cn_text_size">24sp</dimen>
     <dimen name="pwk_keyboard_bubble_en_text_size">29sp</dimen>
-    <dimen name="pwk_keyboard_key_cn_text_size">21sp</dimen>
-    <dimen name="pwk_keyboard_key_en_text_size">23sp</dimen>
+    <dimen name="pwk_keyboard_key_cn_text_size">20sp</dimen>
+    <dimen name="pwk_keyboard_key_en_text_size">22sp</dimen>
 
     <!--输入组件的参数设置-->
 

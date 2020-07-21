@@ -1,6 +1,6 @@
 package com.parkingwang.keyboard.engine;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +15,7 @@ import static com.parkingwang.keyboard.engine.NumberType.NEW_ENERGY;
 import static com.parkingwang.keyboard.engine.NumberType.PLA2012;
 import static com.parkingwang.keyboard.engine.NumberType.SHI2012;
 import static com.parkingwang.keyboard.engine.NumberType.SHI2017;
+import static com.parkingwang.keyboard.engine.NumberType.VIN;
 import static com.parkingwang.keyboard.engine.NumberType.WJ2012;
 import static com.parkingwang.keyboard.engine.Utils.mkEntitiesOf;
 
@@ -171,7 +172,10 @@ class LayoutManager {
 
         @Override
         public LayoutEntry get(Context ctx) {
-            if (3 == ctx.selectIndex || 4 == ctx.selectIndex || 5 == ctx.selectIndex) {
+            //增加VIN键盘
+            if (VIN.equals(ctx.numberType)) {
+                return mNamedLayouts.get(NAME_WITH_IO);
+            } else if (3 == ctx.selectIndex || 4 == ctx.selectIndex || 5 == ctx.selectIndex) {
                 return mNamedLayouts.get(NAME_WITH_IO);
             } else if (1 == ctx.selectIndex && !AVIATION.equals(ctx.numberType)) {
                 return mNamedLayouts.get(NAME_WITH_IO);

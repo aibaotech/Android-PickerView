@@ -21,6 +21,9 @@ class VNumberChars {
     static final String MORE = ">";
     static final String BACK = "<";
 
+    static final String VIN_no_ioq = "WERTYUPASDFGHJKLZXCVBNM";
+
+
     private VNumberChars() {
 
     }

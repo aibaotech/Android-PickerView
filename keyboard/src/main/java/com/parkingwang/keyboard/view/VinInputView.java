@@ -1,10 +1,10 @@
 package com.parkingwang.keyboard.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -25,9 +25,9 @@ import java.util.Set;
 /**
  * @author 陈哈哈 (yoojiachen@gmail.com)
  */
-public class InputView extends LinearLayout {
+public class VinInputView extends LinearLayout {
 
-    private static final String TAG = InputView.class.getName();
+    private static final String TAG = VinInputView.class.getName();
 
     private static final String KEY_INIT_NUMBER = "pwk.keyboard.key:init.number";
 
@@ -35,7 +35,7 @@ public class InputView extends LinearLayout {
 
     private final Set<OnFieldViewSelectedListener> mOnFieldViewSelectedListeners = new HashSet<>(4);
 
-    private final FieldViewGroup mFieldViewGroup;
+    private final VinFieldViewGroup mFieldViewGroup;
 
     /**
      * 点击选中输入框时，只可以从左到右顺序输入，不可隔位
@@ -73,20 +73,19 @@ public class InputView extends LinearLayout {
     @Nullable
     private SelectedDrawable mSelectedDrawable;
 
-    public InputView(Context context, @Nullable AttributeSet attrs) {
+    public VinInputView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, R.attr.pwkInputStyle);
     }
 
-    public InputView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    @SuppressLint("RestrictedApi")
+    public VinInputView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        inflate(context, R.layout.pwk_input_view, this);
-        mFieldViewGroup = new FieldViewGroup() {
+        inflate(context, R.layout.vin_input_view, this);
+        mFieldViewGroup = new VinFieldViewGroup() {
             @Override
             protected Button findViewById(int id) {
-                Button button = InputView.this.findViewById(id);
-                button.setTypeface(Typeface.createFromAsset(getContext().getApplicationContext().getAssets(), "fonts/din.otf"));
-                return button;
+                return VinInputView.this.findViewById(id);
             }
         };
         onInited(context, attrs, defStyleAttr);
@@ -104,7 +103,6 @@ public class InputView extends LinearLayout {
 
         mFieldViewGroup.setupAllFieldsTextSize(textSize);
         mFieldViewGroup.setupAllFieldsOnClickListener(mOnFieldViewClickListener);
-        mFieldViewGroup.changeTo7Fields();
     }
 
     private void initSelectedDrawable(String className, int selectedColor) {
@@ -212,19 +210,12 @@ public class InputView extends LinearLayout {
      * 如果全部为空，则选中第1个输入框。
      */
     public void performLastPendingFieldView() {
-        final Button field = mFieldViewGroup.getLastFilledFieldOrNull();
 
         for (Button f : mFieldViewGroup.getFieldViews()) {
             if (f != null) {
                 f.setSelected(false);
             }
         }
-//
-//        if (field != null) {
-//            performNextFieldViewBy(field);
-//        } else {
-//            performFieldViewSetToSelected(mFieldViewGroup.getFieldAt(0));
-//        }
     }
 
     /**
@@ -254,27 +245,6 @@ public class InputView extends LinearLayout {
     }
 
     /**
-     * 设置第8位输入框显示状态
-     *
-     * @param setToShow8thField 是否显示
-     */
-    public void set8thVisibility(boolean setToShow8thField) {
-        final boolean changed;
-        if (setToShow8thField) {
-            changed = mFieldViewGroup.changeTo8Fields();
-        } else {
-            changed = mFieldViewGroup.changeTo7Fields();
-        }
-        if (changed) {
-            final Button field = mFieldViewGroup.getFirstEmptyField();
-            if (field != null) {
-                Log.d(TAG, "[@@ FieldChanged @@] FirstEmpty.tag: " + field.getTag());
-                setFieldViewSelected(field);
-            }
-        }
-    }
-
-    /**
      * 是否最后一位被选中状态。
      *
      * @return 是否选中
@@ -283,7 +253,7 @@ public class InputView extends LinearLayout {
         return mFieldViewGroup.getLastField().isSelected();
     }
 
-    public InputView addOnFieldViewSelectedListener(OnFieldViewSelectedListener listener) {
+    public VinInputView addOnFieldViewSelectedListener(OnFieldViewSelectedListener listener) {
         mOnFieldViewSelectedListeners.add(listener);
         return this;
     }

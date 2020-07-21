@@ -9,53 +9,53 @@ import android.view.Window;
 import androidx.annotation.ColorInt;
 
 import com.parkingwang.keyboard.engine.KeyboardEngine;
-import com.parkingwang.keyboard.view.InputView;
-import com.parkingwang.keyboard.view.KeyboardView;
+import com.parkingwang.keyboard.view.VinInputView;
+import com.parkingwang.keyboard.view.VinKeyboardView;
 
 /**
  * @author Yoojia Chen (yoojiachen@gmail.com)
  * @version 2017-11-03 0.1
  * @since 2017-11-03 0.1
  */
-public class PopupKeyboard {
+public class VinPopupKeyboard {
 
-    private final KeyboardView mKeyboardView;
+    private final VinKeyboardView mKeyboardView;
 
-    private KeyboardInputController mController;
+    private VinKeyboardInputController mController;
 
     private boolean isDialog = false;
 
-    public PopupKeyboard(Context context) {
-        mKeyboardView = new KeyboardView(context);
+    public VinPopupKeyboard(Context context) {
+        mKeyboardView = new VinKeyboardView(context);
     }
 
-    public PopupKeyboard(Context context, @ColorInt int bubbleTextColor, ColorStateList okKeyBackgroundColor) {
-        mKeyboardView = new KeyboardView(context);
+    public VinPopupKeyboard(Context context, @ColorInt int bubbleTextColor, ColorStateList okKeyBackgroundColor) {
+        mKeyboardView = new VinKeyboardView(context);
         mKeyboardView.setBubbleTextColor(bubbleTextColor);
         mKeyboardView.setOkKeyTintColor(okKeyBackgroundColor);
     }
 
-    public KeyboardView getKeyboardView() {
+    public VinKeyboardView getKeyboardView() {
         return mKeyboardView;
     }
 
-    public void attach(InputView inputView, final Activity activity) {
+    public void attach(VinInputView inputView, final Activity activity) {
         isDialog = false;
         attach(inputView, activity.getWindow());
     }
 
-    public void attach(InputView inputView, final Dialog dialog) {
+    public void attach(VinInputView inputView, final Dialog dialog) {
         isDialog = true;
         attach(inputView, dialog.getWindow());
     }
 
-    private void attach(InputView inputView, final Window window) {
+    private void attach(VinInputView inputView, final Window window) {
          if (mController == null) {
-            mController = KeyboardInputController
+            mController = VinKeyboardInputController
                     .with(mKeyboardView, inputView);
 //            mController.useDefaultMessageHandler();
 
-            inputView.addOnFieldViewSelectedListener(new InputView.OnFieldViewSelectedListener() {
+            inputView.addOnFieldViewSelectedListener(new VinInputView.OnFieldViewSelectedListener() {
                 @Override
                 public void onSelectedAt(int index) {
                     show(window);
@@ -64,7 +64,7 @@ public class PopupKeyboard {
         }
     }
 
-    public KeyboardInputController getController() {
+    public VinKeyboardInputController getController() {
         return checkAttachedController();
     }
 
@@ -94,7 +94,7 @@ public class PopupKeyboard {
         return mKeyboardView.isShown();
     }
 
-    private KeyboardInputController checkAttachedController() {
+    private VinKeyboardInputController checkAttachedController() {
         if (mController == null) {
             throw new IllegalStateException("Try attach() first");
         }

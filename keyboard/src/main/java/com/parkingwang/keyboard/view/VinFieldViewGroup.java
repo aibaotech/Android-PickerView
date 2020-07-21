@@ -12,15 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 陈小锅 (yoojiachen@gmail.com)
+ * @author shuai
+ * VIN码专用布局
  */
-abstract class FieldViewGroup {
+abstract class VinFieldViewGroup {
 
-    private static final String TAG = "InputView.ButtonGroup";
+    private static final String TAG = "VinFieldViewGroup";
 
-    private final Button[] mFieldViews = new Button[8];
+    private final Button[] mFieldViews = new Button[17];
 
-    public FieldViewGroup() {
+    public VinFieldViewGroup() {
         final int[] resIds = new int[]{
                 R.id.number_0,
                 R.id.number_1,
@@ -29,14 +30,21 @@ abstract class FieldViewGroup {
                 R.id.number_4,
                 R.id.number_5,
                 R.id.number_6,
-                R.id.number_7
+                R.id.number_7,
+                R.id.number_8,
+                R.id.number_9,
+                R.id.number_10,
+                R.id.number_11,
+                R.id.number_12,
+                R.id.number_13,
+                R.id.number_14,
+                R.id.number_15,
+                R.id.number_16,
         };
         for (int i = 0; i < resIds.length; i++) {
             mFieldViews[i] = findViewById(resIds[i]);
             mFieldViews[i].setTag("[RAW.idx:" + i + "]");
         }
-        // 默认时，显示8位
-        changeTo8Fields();
     }
 
     protected abstract Button findViewById(int id);
@@ -48,11 +56,6 @@ abstract class FieldViewGroup {
         }
 
         final char[] chars = text.toCharArray();
-        if (chars.length >= 8) {
-            changeTo8Fields();
-        } else {
-            changeTo7Fields();
-        }
         // 显示到对应键位
         final Button[] fields = getAvailableFields();
         for (int i = 0; i < fields.length; i++) {
@@ -68,7 +71,7 @@ abstract class FieldViewGroup {
     }
 
     public Button[] getAvailableFields() {
-        final List<Button> output = new ArrayList<>(8);
+        final List<Button> output = new ArrayList<>(17);
         final int lastIndex = mFieldViews.length - 1;
         Button fieldView;
         for (int i = 0; i < mFieldViews.length; i++) {
@@ -84,30 +87,9 @@ abstract class FieldViewGroup {
         return mFieldViews[index];
     }
 
-    public boolean changeTo7Fields() {
-        if (mFieldViews[7].getVisibility() != View.VISIBLE) {
-            return false;
-        }
-        mFieldViews[7].setVisibility(View.GONE);
-        mFieldViews[7].setText(null);
-        return true;
-    }
-
-    public boolean changeTo8Fields() {
-        if (mFieldViews[7].getVisibility() == View.VISIBLE) {
-            return false;
-        }
-        mFieldViews[7].setVisibility(View.VISIBLE);
-        mFieldViews[7].setText(null);
-        return true;
-    }
 
     public Button getLastField() {
-        if (mFieldViews[7].getVisibility() == View.VISIBLE) {
-            return mFieldViews[7];
-        } else {
-            return mFieldViews[6];
-        }
+        return mFieldViews[16];
     }
 
     public Button getFirstSelectedFieldOrNull() {

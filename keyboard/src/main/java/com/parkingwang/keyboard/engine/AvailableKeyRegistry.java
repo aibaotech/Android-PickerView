@@ -12,6 +12,7 @@ import static com.parkingwang.keyboard.engine.NumberType.NEW_ENERGY;
 import static com.parkingwang.keyboard.engine.NumberType.PLA2012;
 import static com.parkingwang.keyboard.engine.NumberType.SHI2012;
 import static com.parkingwang.keyboard.engine.NumberType.SHI2017;
+import static com.parkingwang.keyboard.engine.NumberType.VIN;
 import static com.parkingwang.keyboard.engine.NumberType.WJ2012;
 import static com.parkingwang.keyboard.engine.Utils.append;
 import static com.parkingwang.keyboard.engine.Utils.mkEntitiesOf;
@@ -22,6 +23,7 @@ import static com.parkingwang.keyboard.engine.VNumberChars.NUMERIC;
 import static com.parkingwang.keyboard.engine.VNumberChars.NUMERIC_123;
 import static com.parkingwang.keyboard.engine.VNumberChars.QWERTY_has_O;
 import static com.parkingwang.keyboard.engine.VNumberChars.QWERTY_no_O;
+import static com.parkingwang.keyboard.engine.VNumberChars.VIN_no_ioq;
 
 /**
  * 键盘布局注册管理器。
@@ -38,10 +40,9 @@ class AvailableKeyRegistry {
         final RowEntry lettersNumeric = mkEntitiesOf(QWERTY_no_O + NUMERIC);
         final RowEntry civilProvince = mkEntitiesOf(CIVIL_PROVINCES);
         final RowEntry lettersHasO = mkEntitiesOf(QWERTY_has_O);
-        final RowEntry lettersHasONumeric = mkEntitiesOf(NUMERIC + QWERTY_has_O);
         final RowEntry civilPost = append(lettersNumeric, mkEntitiesOf(CIVIL_POST));
         mCache.put(mkKey(CIVIL, 0), civilProvince);
-        mCache.put(mkKey(CIVIL, 1), lettersHasONumeric);
+        mCache.put(mkKey(CIVIL, 1), lettersHasO);
         mCache.put(mkKey(CIVIL, 2), lettersNumeric);
         mCache.put(mkKey(CIVIL, 3), lettersNumeric);
         mCache.put(mkKey(CIVIL, 4), lettersNumeric);
@@ -52,12 +53,12 @@ class AvailableKeyRegistry {
         final RowEntry numericDF = mkEntitiesOf(NUMERIC + "DF");
         mCache.put(mkKey(NEW_ENERGY, 0), civilProvince);
         mCache.put(mkKey(NEW_ENERGY, 1), lettersHasO);
-        mCache.put(mkKey(NEW_ENERGY, 2), lettersNumeric);
+        mCache.put(mkKey(NEW_ENERGY, 2), numericDF);
         mCache.put(mkKey(NEW_ENERGY, 3), lettersNumeric);
         mCache.put(mkKey(NEW_ENERGY, 4), lettersNumeric);
         mCache.put(mkKey(NEW_ENERGY, 5), lettersNumeric);
         mCache.put(mkKey(NEW_ENERGY, 6), lettersNumeric);
-        mCache.put(mkKey(NEW_ENERGY, 7), lettersNumeric);
+        mCache.put(mkKey(NEW_ENERGY, 7), numericDF);
 
         //// 武警2012式
         mCache.put(mkKey(WJ2012, 0), mkEntitiesOf("W"));
@@ -130,12 +131,16 @@ class AvailableKeyRegistry {
         //// 未知类型
         final RowEntry auto = append(civilProvince, lettersNumeric, mkEntitiesOf("民使"));
         mCache.put(mkKey(AUTO_DETECT, 0), auto);
-        mCache.put(mkKey(AUTO_DETECT, 1), append(lettersHasO, numeric, mkEntitiesOf("航J")));
+        mCache.put(mkKey(AUTO_DETECT, 1), append(lettersHasO, numeric123, mkEntitiesOf("航J")));
         mCache.put(mkKey(AUTO_DETECT, 2), lettersNumeric);
         mCache.put(mkKey(AUTO_DETECT, 3), lettersNumeric);
         mCache.put(mkKey(AUTO_DETECT, 4), lettersNumeric);
         mCache.put(mkKey(AUTO_DETECT, 5), lettersNumeric);
         mCache.put(mkKey(AUTO_DETECT, 6), civilPost);
+
+        //VIN码类型 IOQ不可点击
+        final RowEntry vinNumeric = mkEntitiesOf(VIN_no_ioq + NUMERIC);
+        mCache.put(mkKey(VIN, 0), vinNumeric);
     }
 
     /**
@@ -146,6 +151,9 @@ class AvailableKeyRegistry {
      * @return 全部可用键位
      */
     public RowEntry available(NumberType type, int selectedIndex) {
+        if (VIN.equals(type)) {
+            return mCache.get(mkKey(type, 0));
+        }
         final RowEntry found = mCache.get(mkKey(type, selectedIndex));
         if (null != found) {
             return found;

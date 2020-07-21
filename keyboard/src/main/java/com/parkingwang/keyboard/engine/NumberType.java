@@ -56,7 +56,12 @@ public enum NumberType {
     /**
      * 民航车牌
      */
-    AVIATION;
+    AVIATION,
+
+    /**
+     * VIN码
+     */
+    VIN;
 
     /**
      * 检测车牌号码所属的车牌号码类型
@@ -130,7 +135,9 @@ public enum NumberType {
             case WJ2012:
             case NEW_ENERGY:
                 return 8;
-
+            //VIN码17位
+            case VIN:
+                return 17;
             default:
                 return 7;
         }

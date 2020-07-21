@@ -11,9 +11,10 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import 
+androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -40,26 +41,26 @@ public class KeyboardView extends LinearLayout {
     private static final String TAG = "KeyboardView";
 
     private final Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
-    private final List<OnKeyboardChangedListener> mKeyboardChangedListeners = new CopyOnWriteArrayList<>();
-    private final KeyboardEngine mKeyboardEngine = new KeyboardEngine();
-    private final KeyViewCacheHelper mKeyCacheHelper = new KeyViewCacheHelper();
+    protected final List<OnKeyboardChangedListener> mKeyboardChangedListeners = new CopyOnWriteArrayList<>();
+    protected final KeyboardEngine mKeyboardEngine = new KeyboardEngine();
+    protected final KeyViewCacheHelper mKeyCacheHelper = new KeyViewCacheHelper();
     private int mRowSpace;
     private int mDefaultKeyHeight;
-    private boolean mShowBubble = true;
-    private float mCNTextSize;
-    private float mENTextSize;
+    protected boolean mShowBubble = true;
+    protected float mCNTextSize;
+    protected float mENTextSize;
     private MotionEvent mLastEvent;
     // 缓存当前状态，用于切换“更多”与“返回”的状态
-    private String mStashedNumber;
-    private int mStashedIndex;
-    private NumberType mStashedNumberType;
+    protected String mStashedNumber;
+    protected int mStashedIndex;
+    protected NumberType mStashedNumberType;
 
     //按下气泡文字的颜色
-    private int mBubbleTextColor = -1;
+    protected int mBubbleTextColor = -1;
     //确定键的背景颜色
-    private ColorStateList mOkKeyTintColor;
+    protected ColorStateList mOkKeyTintColor;
 
-    private final OnClickListener mOnKeyPressedListener = new OnClickListener() {
+    protected final OnClickListener mOnKeyPressedListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {

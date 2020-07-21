@@ -8,8 +8,9 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import 
+androidx.annotation.Nullable;
 
 /**
  * @author 黄浩杭 (huanghaohang@parkingwang.com)
@@ -51,24 +52,27 @@ public class SelectedDrawable extends Drawable {
     @Override
     public void draw(@NonNull Canvas canvas) {
         float strokeWidthOffset = mPaint.getStrokeWidth() / 2;
-        int left = mRect.left;
-        int top = mRect.top + (int) strokeWidthOffset;
-        int right = mRect.right;
-        int bottom = mRect.bottom - (int) strokeWidthOffset;
+        int left = mRect.left + (int) strokeWidthOffset * 2;
+        int top = mRect.top + (int) strokeWidthOffset * 2;
+        int right = (int) (mRect.right - strokeWidthOffset);
+        int bottom = mRect.bottom - (int) strokeWidthOffset * 2;
         final float[] radiusArray = new float[8];
-        if (mPosition == Position.FIRST) {
-            left += strokeWidthOffset;
-            radiusArray[0] = mRadius;
-            radiusArray[1] = mRadius;
-            radiusArray[6] = mRadius;
-            radiusArray[7] = mRadius;
-        } else if (mPosition == Position.LAST) {
-            right -= strokeWidthOffset;
-            radiusArray[2] = mRadius;
-            radiusArray[3] = mRadius;
-            radiusArray[4] = mRadius;
-            radiusArray[5] = mRadius;
+        for (int i = 0; i < radiusArray.length; i++) {
+            radiusArray[i] = mRadius;
         }
+        //        if (mPosition == Position.FIRST) {
+        //            left += strokeWidthOffset;
+        //            radiusArray[0] = mRadius;
+        //            radiusArray[1] = mRadius;
+        //            radiusArray[6] = mRadius;
+        //            radiusArray[7] = mRadius;
+        //        } else if (mPosition == Position.LAST) {
+        //            right -= strokeWidthOffset;
+        //            radiusArray[2] = mRadius;
+        //            radiusArray[3] = mRadius;
+        //            radiusArray[4] = mRadius;
+        //            radiusArray[5] = mRadius;
+        //        }
         mPath.reset();
         mPathRectF.set(left, top, right, bottom);
         mPath.addRoundRect(mPathRectF, radiusArray, Path.Direction.CW);
