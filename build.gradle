@@ -9,17 +9,18 @@ subprojects {
 //            google()
 //            jcenter()
             mavenCentral()
+            google()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.2.1'
+            classpath 'com.android.tools.build:gradle:3.6.3'
             classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-            classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-            classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.5.4"
             classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         }
     }
 
     repositories {
+        mavenLocal()
+
         maven {  url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
@@ -32,9 +33,15 @@ subprojects {
 }
 
 ext {
-    minSdkVersion = 13
-    compileSdkVersion = 26
-    buildToolsVersion = '26.0.2'
+
+    compileSdkVersion= 29
+    buildToolsVersion= "29.0.3"
+    minSdkVersion    = 21
+    targetSdkVersion = 28
+
+//    minSdkVersion = 13
+//    compileSdkVersion = 26
+//    buildToolsVersion = '26.0.2'
     sourceCompatibility = JavaVersion.VERSION_1_7
 }
 
