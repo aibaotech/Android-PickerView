@@ -3,7 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 //apply plugin: 'com.jfrog.bintray'
 //apply plugin: 'com.jfrog.artifactory'
 
-//group = GROUP
+group='aibao-developer'
 //
 //boolean isReleaseBuild = gradle.startParameter.taskNames.contains('bintrayUpload')
 //version = isReleaseBuild ? VERSION_NAME : "$VERSION_NAME-SNAPSHOT"
