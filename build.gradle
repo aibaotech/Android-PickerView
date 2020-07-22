@@ -2,8 +2,12 @@
 subprojects {
     buildscript {
         repositories {
-            google()
-            jcenter()
+            maven {  url 'https://maven.aliyun.com/repository/google/' }
+            maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+            maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+
+//            google()
+//            jcenter()
             mavenCentral()
         }
         dependencies {
@@ -16,9 +20,14 @@ subprojects {
     }
 
     repositories {
-        google()
+        maven {  url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+
+
+//        google()
         mavenCentral()
-        jcenter()
+//        jcenter()
     }
 }
 
