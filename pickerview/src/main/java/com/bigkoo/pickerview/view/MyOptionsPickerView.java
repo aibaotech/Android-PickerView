@@ -10,7 +10,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.R;
+import com.bigkoo.pickerview.configure.MyPickerOptions;
 import com.bigkoo.pickerview.configure.PickerOptions;
+import com.bigkoo.pickerview.listener.OnDismissListener;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import java.util.List;
  * 条件选择器
  * Created by Sai on 15/11/22.
  */
-public class OptionsPickerView<T> extends BasePickerView implements View.OnClickListener {
+public class MyOptionsPickerView<T> extends MyBasePickerView implements View.OnClickListener {
 
     private WheelOptions wheelOptions;
 
@@ -26,7 +28,7 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
     private static final String TAG_CANCEL = "cancel";
 
 
-    public OptionsPickerView(PickerOptions pickerOptions) {
+    public MyOptionsPickerView(MyPickerOptions pickerOptions) {
         super(pickerOptions.context);
         mPickerOptions = pickerOptions;
         initView(pickerOptions.context);
@@ -62,8 +64,10 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
             btnSubmit.setTextColor(mPickerOptions.textColorConfirm);
             btnCancel.setTextColor(mPickerOptions.textColorCancel);
             tvTitle.setTextColor(mPickerOptions.textColorTitle);
-            rv_top_bar.setBackgroundColor(mPickerOptions.bgColorTitle);
-
+//            rv_top_bar.setBackgroundColor(mPickerOptions.bgColorTitle);
+            if(mPickerOptions.bgdrawableTitle!=-1){
+                rv_top_bar.setBackgroundResource(mPickerOptions.bgdrawableTitle);
+            }
             //设置文字大小
             btnSubmit.setTextSize(mPickerOptions.textSizeSubmitCancel);
             btnCancel.setTextSize(mPickerOptions.textSizeSubmitCancel);
@@ -75,7 +79,7 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
         // ----滚轮布局
         final LinearLayout optionsPicker = (LinearLayout) findViewById(R.id.optionspicker);
         optionsPicker.setBackgroundColor(mPickerOptions.bgColorWheel);
-
+        optionsPicker.setPadding(0,0,0,mPickerOptions.mNavigationBarHeight);
         wheelOptions = new WheelOptions(optionsPicker, mPickerOptions.isRestoreItem);
         if (mPickerOptions.optionsSelectChangeListener != null) {
             wheelOptions.setOptionsSelectChangeListener(mPickerOptions.optionsSelectChangeListener);

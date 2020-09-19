@@ -6,11 +6,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 
-import com.bigkoo.pickerview.configure.PickerOptions;
+import com.bigkoo.pickerview.configure.MyPickerOptions;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.TimePickerView;
+import com.bigkoo.pickerview.view.MyTimePickerView;
 import com.contrarywind.view.WheelView;
 
 import java.util.Calendar;
@@ -19,24 +19,39 @@ import java.util.Calendar;
  * Created by xiaosongzeem on 2018/3/20.
  */
 
-public class TimePickerBuilder {
+public class MyTimePickerBuilder {
 
-    private PickerOptions mPickerOptions;
+    private MyPickerOptions mPickerOptions;
 
     //Required
-    public TimePickerBuilder(Context context, OnTimeSelectListener listener) {
-        mPickerOptions = new PickerOptions(PickerOptions.TYPE_PICKER_TIME);
+    public MyTimePickerBuilder(Context context, OnTimeSelectListener listener) {
+        mPickerOptions = new MyPickerOptions(MyPickerOptions.TYPE_PICKER_TIME);
         mPickerOptions.context = context;
         mPickerOptions.timeSelectListener = listener;
     }
 
+    public MyTimePickerBuilder setDrawablebgTitle(int bgdrawableTitle) {
+        mPickerOptions.bgdrawableTitle = bgdrawableTitle;
+        return this;
+    }
+
+    /**
+     * 设置底部导航栏高度
+     *
+     * @param
+     */
+    public MyTimePickerBuilder setNavigationBarHeight(int mNavigationBarHeight) {
+        mPickerOptions.mNavigationBarHeight = mNavigationBarHeight;
+        return this;
+    }
+
     //Option
-    public TimePickerBuilder setGravity(int gravity) {
+    public MyTimePickerBuilder setGravity(int gravity) {
         mPickerOptions.textGravity = gravity;
         return this;
     }
 
-    public TimePickerBuilder addOnCancelClickListener(View.OnClickListener cancelListener) {
+    public MyTimePickerBuilder addOnCancelClickListener(View.OnClickListener cancelListener) {
         mPickerOptions.cancelListener = cancelListener;
         return this;
     }
@@ -47,39 +62,39 @@ public class TimePickerBuilder {
      * 分别控制“年”“月”“日”“时”“分”“秒”的显示或隐藏。
      *
      * @param type 布尔型数组，长度需要设置为6。
-     * @return TimePickerBuilder
+     * @return MyTimePickerBuilder
      */
-    public TimePickerBuilder setType(boolean[] type) {
+    public MyTimePickerBuilder setType(boolean[] type) {
         mPickerOptions.type = type;
         return this;
     }
 
-    public TimePickerBuilder setSubmitText(String textContentConfirm) {
+    public MyTimePickerBuilder setSubmitText(String textContentConfirm) {
         mPickerOptions.textContentConfirm = textContentConfirm;
         return this;
     }
 
-    public TimePickerBuilder isDialog(boolean isDialog) {
+    public MyTimePickerBuilder isDialog(boolean isDialog) {
         mPickerOptions.isDialog = isDialog;
         return this;
     }
 
-    public TimePickerBuilder setCancelText(String textContentCancel) {
+    public MyTimePickerBuilder setCancelText(String textContentCancel) {
         mPickerOptions.textContentCancel = textContentCancel;
         return this;
     }
 
-    public TimePickerBuilder setTitleText(String textContentTitle) {
+    public MyTimePickerBuilder setTitleText(String textContentTitle) {
         mPickerOptions.textContentTitle = textContentTitle;
         return this;
     }
 
-    public TimePickerBuilder setSubmitColor(int textColorConfirm) {
+    public MyTimePickerBuilder setSubmitColor(int textColorConfirm) {
         mPickerOptions.textColorConfirm = textColorConfirm;
         return this;
     }
 
-    public TimePickerBuilder setCancelColor(int textColorCancel) {
+    public MyTimePickerBuilder setCancelColor(int textColorCancel) {
         mPickerOptions.textColorCancel = textColorCancel;
         return this;
     }
@@ -88,39 +103,39 @@ public class TimePickerBuilder {
      * ViewGroup 类型的容器
      *
      * @param decorView 选择器会被添加到此容器中
-     * @return TimePickerBuilder
+     * @return MyTimePickerBuilder
      */
-    public TimePickerBuilder setDecorView(ViewGroup decorView) {
+    public MyTimePickerBuilder setDecorView(ViewGroup decorView) {
         mPickerOptions.decorView = decorView;
         return this;
     }
 
-    public TimePickerBuilder setBgColor(int bgColorWheel) {
+    public MyTimePickerBuilder setBgColor(int bgColorWheel) {
         mPickerOptions.bgColorWheel = bgColorWheel;
         return this;
     }
 
-    public TimePickerBuilder setTitleBgColor(int bgColorTitle) {
+    public MyTimePickerBuilder setTitleBgColor(int bgColorTitle) {
         mPickerOptions.bgColorTitle = bgColorTitle;
         return this;
     }
 
-    public TimePickerBuilder setTitleColor(int textColorTitle) {
+    public MyTimePickerBuilder setTitleColor(int textColorTitle) {
         mPickerOptions.textColorTitle = textColorTitle;
         return this;
     }
 
-    public TimePickerBuilder setSubCalSize(int textSizeSubmitCancel) {
+    public MyTimePickerBuilder setSubCalSize(int textSizeSubmitCancel) {
         mPickerOptions.textSizeSubmitCancel = textSizeSubmitCancel;
         return this;
     }
 
-    public TimePickerBuilder setTitleSize(int textSizeTitle) {
+    public MyTimePickerBuilder setTitleSize(int textSizeTitle) {
         mPickerOptions.textSizeTitle = textSizeTitle;
         return this;
     }
 
-    public TimePickerBuilder setContentTextSize(int textSizeContent) {
+    public MyTimePickerBuilder setContentTextSize(int textSizeContent) {
         mPickerOptions.textSizeContent = textSizeContent;
         return this;
     }
@@ -129,14 +144,14 @@ public class TimePickerBuilder {
      * 因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
      *
      * @param date
-     * @return TimePickerBuilder
+     * @return MyTimePickerBuilder
      */
-    public TimePickerBuilder setDate(Calendar date) {
+    public MyTimePickerBuilder setDate(Calendar date) {
         mPickerOptions.date = date;
         return this;
     }
 
-    public TimePickerBuilder setLayoutRes(int res, CustomListener customListener) {
+    public MyTimePickerBuilder setLayoutRes(int res, CustomListener customListener) {
         mPickerOptions.layoutRes = res;
         mPickerOptions.customListener = customListener;
         return this;
@@ -148,7 +163,7 @@ public class TimePickerBuilder {
      * 因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
      */
 
-    public TimePickerBuilder setRangDate(Calendar startDate, Calendar endDate) {
+    public MyTimePickerBuilder setRangDate(Calendar startDate, Calendar endDate) {
         mPickerOptions.startDate = startDate;
         mPickerOptions.endDate = endDate;
         return this;
@@ -160,7 +175,7 @@ public class TimePickerBuilder {
      *
      * @param lineSpacingMultiplier
      */
-    public TimePickerBuilder setLineSpacingMultiplier(float lineSpacingMultiplier) {
+    public MyTimePickerBuilder setLineSpacingMultiplier(float lineSpacingMultiplier) {
         mPickerOptions.lineSpacingMultiplier = lineSpacingMultiplier;
         return this;
     }
@@ -171,7 +186,7 @@ public class TimePickerBuilder {
      * @param dividerColor
      */
 
-    public TimePickerBuilder setDividerColor(@ColorInt int dividerColor) {
+    public MyTimePickerBuilder setDividerColor(@ColorInt int dividerColor) {
         mPickerOptions.dividerColor = dividerColor;
         return this;
     }
@@ -181,7 +196,7 @@ public class TimePickerBuilder {
      *
      * @param dividerType
      */
-    public TimePickerBuilder setDividerType(WheelView.DividerType dividerType) {
+    public MyTimePickerBuilder setDividerType(WheelView.DividerType dividerType) {
         mPickerOptions.dividerType = dividerType;
         return this;
     }
@@ -192,7 +207,7 @@ public class TimePickerBuilder {
      * @param backgroundId color resId.
      */
     @Deprecated
-    public TimePickerBuilder setBackgroundId(int backgroundId) {
+    public MyTimePickerBuilder setBackgroundId(int backgroundId) {
         mPickerOptions.outSideColor = backgroundId;
         return this;
     }
@@ -202,7 +217,7 @@ public class TimePickerBuilder {
      *
      * @param outSideColor
      */
-    public TimePickerBuilder setOutSideColor(@ColorInt int outSideColor) {
+    public MyTimePickerBuilder setOutSideColor(@ColorInt int outSideColor) {
         mPickerOptions.outSideColor = outSideColor;
         return this;
     }
@@ -212,7 +227,7 @@ public class TimePickerBuilder {
      *
      * @param textColorCenter
      */
-    public TimePickerBuilder setTextColorCenter(@ColorInt int textColorCenter) {
+    public MyTimePickerBuilder setTextColorCenter(@ColorInt int textColorCenter) {
         mPickerOptions.textColorCenter = textColorCenter;
         return this;
     }
@@ -222,28 +237,28 @@ public class TimePickerBuilder {
      *
      * @param textColorOut
      */
-    public TimePickerBuilder setTextColorOut(@ColorInt int textColorOut) {
+    public MyTimePickerBuilder setTextColorOut(@ColorInt int textColorOut) {
         mPickerOptions.textColorOut = textColorOut;
         return this;
     }
 
-    public TimePickerBuilder isCyclic(boolean cyclic) {
+    public MyTimePickerBuilder isCyclic(boolean cyclic) {
         mPickerOptions.cyclic = cyclic;
         return this;
     }
 
-    public TimePickerBuilder setOutSideCancelable(boolean cancelable) {
+    public MyTimePickerBuilder setOutSideCancelable(boolean cancelable) {
         mPickerOptions.cancelable = cancelable;
         return this;
     }
 
-    public TimePickerBuilder setLunarCalendar(boolean lunarCalendar) {
+    public MyTimePickerBuilder setLunarCalendar(boolean lunarCalendar) {
         mPickerOptions.isLunarCalendar = lunarCalendar;
         return this;
     }
 
 
-    public TimePickerBuilder setLabel(String label_year, String label_month, String label_day, String label_hours, String label_mins, String label_seconds) {
+    public MyTimePickerBuilder setLabel(String label_year, String label_month, String label_day, String label_hours, String label_mins, String label_seconds) {
         mPickerOptions.label_year = label_year;
         mPickerOptions.label_month = label_month;
         mPickerOptions.label_day = label_day;
@@ -264,7 +279,7 @@ public class TimePickerBuilder {
      * @param x_offset_seconds 秒
      * @return
      */
-    public TimePickerBuilder setTextXOffset(int x_offset_year, int x_offset_month, int x_offset_day,
+    public MyTimePickerBuilder setTextXOffset(int x_offset_year, int x_offset_month, int x_offset_day,
                                             int x_offset_hours, int x_offset_minutes, int x_offset_seconds) {
         mPickerOptions.x_offset_year = x_offset_year;
         mPickerOptions.x_offset_month = x_offset_month;
@@ -275,7 +290,7 @@ public class TimePickerBuilder {
         return this;
     }
 
-    public TimePickerBuilder isCenterLabel(boolean isCenterLabel) {
+    public MyTimePickerBuilder isCenterLabel(boolean isCenterLabel) {
         mPickerOptions.isCenterLabel = isCenterLabel;
         return this;
     }
@@ -284,12 +299,12 @@ public class TimePickerBuilder {
      * @param listener 切换item项滚动停止时，实时回调监听。
      * @return
      */
-    public TimePickerBuilder setTimeSelectChangeListener(OnTimeSelectChangeListener listener) {
+    public MyTimePickerBuilder setTimeSelectChangeListener(OnTimeSelectChangeListener listener) {
         mPickerOptions.timeSelectChangeListener = listener;
         return this;
     }
 
-    public TimePickerView build() {
-        return new TimePickerView(mPickerOptions);
+    public MyTimePickerView build() {
+        return new MyTimePickerView(mPickerOptions);
     }
 }

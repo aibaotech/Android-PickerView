@@ -10,25 +10,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.R;
+import com.bigkoo.pickerview.configure.MyPickerOptions;
 import com.bigkoo.pickerview.configure.PickerOptions;
 import com.bigkoo.pickerview.listener.ISelectTimeCallback;
 
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 时间选择器
  * Created by Sai on 15/11/22.
  * Updated by XiaoSong on 2017-2-22.
  */
-public class TimePickerView extends BasePickerView implements View.OnClickListener {
+public class MyTimePickerView<T> extends MyBasePickerView implements View.OnClickListener {
 
     private WheelTime wheelTime; //自定义控件
     private static final String TAG_SUBMIT = "submit";
     private static final String TAG_CANCEL = "cancel";
 
-    public TimePickerView(PickerOptions pickerOptions) {
+    public MyTimePickerView(MyPickerOptions pickerOptions) {
         super(pickerOptions.context);
         mPickerOptions = pickerOptions;
         initView(pickerOptions.context);
@@ -65,8 +67,10 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
             btnSubmit.setTextColor(mPickerOptions.textColorConfirm);
             btnCancel.setTextColor(mPickerOptions.textColorCancel);
             tvTitle.setTextColor(mPickerOptions.textColorTitle);
-            rv_top_bar.setBackgroundColor(mPickerOptions.bgColorTitle);
-
+//            rv_top_bar.setBackgroundColor(mPickerOptions.bgColorTitle);
+            if(mPickerOptions.bgdrawableTitle!=-1){
+                rv_top_bar.setBackgroundResource(mPickerOptions.bgdrawableTitle);
+            }
             //设置文字大小
             btnSubmit.setTextSize(mPickerOptions.textSizeSubmitCancel);
             btnCancel.setTextSize(mPickerOptions.textSizeSubmitCancel);
@@ -78,7 +82,7 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
         // 时间转轮 自定义控件
         LinearLayout timePickerView = (LinearLayout) findViewById(R.id.timepicker);
         timePickerView.setBackgroundColor(mPickerOptions.bgColorWheel);
-
+        timePickerView.setPadding(0,0,0,mPickerOptions.mNavigationBarHeight);
         initWheelTime(timePickerView);
     }
 

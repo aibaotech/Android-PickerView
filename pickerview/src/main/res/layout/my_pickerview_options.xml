@@ -5,9 +5,9 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/include_pickerview_topbar"
+        layout="@layout/my_include_pickerview_topbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/pickerview_topbar_height" />
+        android:layout_height="54pt" />
 
     <LinearLayout
         android:id="@+id/optionspicker"

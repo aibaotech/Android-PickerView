@@ -3,7 +3,9 @@
     android:id="@+id/rv_topbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pickerview_bg_topbar">
+    android:background="@drawable/bg_pickerview_radius16"
+    android:paddingTop="16pt"
+    android:layout_marginBottom="16pt">
 
     <Button
         android:id="@+id/btnCancel"
@@ -20,8 +22,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_height="match_parent"
         android:layout_toLeftOf="@+id/btnSubmit"
         android:layout_toRightOf="@+id/btnCancel"
         android:textColor="@color/pickerview_topbar_title"

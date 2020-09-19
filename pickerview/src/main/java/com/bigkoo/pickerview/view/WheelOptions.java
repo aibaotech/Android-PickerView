@@ -28,6 +28,16 @@ public class WheelOptions<T> {
 
     private OnOptionsSelectChangeListener optionsSelectChangeListener;
 
+    //文字的颜色和分割线的颜色
+    private int textColorOut;
+    private int textColorCenter;
+    private int dividerColor;
+
+    private WheelView.DividerType dividerType;
+
+    // 条目间距倍数
+    private float lineSpacingMultiplier;
+
     public View getView() {
         return view;
     }
@@ -163,16 +173,16 @@ public class WheelOptions<T> {
     public void setNPicker(List<T> options1Items, List<T> options2Items, List<T> options3Items) {
 
         // 选项1
-        wv_option1.setAdapter(new ArrayWheelAdapter<>(options1Items));// 设置显示数据
+        wv_option1.setAdapter(new ArrayWheelAdapter(options1Items));// 设置显示数据
         wv_option1.setCurrentItem(0);// 初始化时显示的数据
         // 选项2
         if (options2Items != null) {
-            wv_option2.setAdapter(new ArrayWheelAdapter<>(options2Items));// 设置显示数据
+            wv_option2.setAdapter(new ArrayWheelAdapter(options2Items));// 设置显示数据
         }
         wv_option2.setCurrentItem(wv_option2.getCurrentItem());// 初始化时显示的数据
         // 选项3
         if (options3Items != null) {
-            wv_option3.setAdapter(new ArrayWheelAdapter<>(options3Items));// 设置显示数据
+            wv_option3.setAdapter(new ArrayWheelAdapter(options3Items));// 设置显示数据
         }
         wv_option3.setCurrentItem(wv_option3.getCurrentItem());
         wv_option1.setIsOptions(true);
@@ -222,7 +232,34 @@ public class WheelOptions<T> {
         wv_option3.setTextSize(textSize);
     }
 
+    private void setTextColorOut() {
+        wv_option1.setTextColorOut(textColorOut);
+        wv_option2.setTextColorOut(textColorOut);
+        wv_option3.setTextColorOut(textColorOut);
+    }
+
+    private void setTextColorCenter() {
+        wv_option1.setTextColorCenter(textColorCenter);
+        wv_option2.setTextColorCenter(textColorCenter);
+        wv_option3.setTextColorCenter(textColorCenter);
+    }
+
+    private void setDividerColor() {
+        wv_option1.setDividerColor(dividerColor);
+        wv_option2.setDividerColor(dividerColor);
+        wv_option3.setDividerColor(dividerColor);
+    }
+
+    private void setDividerType() {
+        wv_option1.setDividerType(dividerType);
+        wv_option2.setDividerType(dividerType);
+        wv_option3.setDividerType(dividerType);
+    }
+
     private void setLineSpacingMultiplier() {
+        wv_option1.setLineSpacingMultiplier(lineSpacingMultiplier);
+        wv_option2.setLineSpacingMultiplier(lineSpacingMultiplier);
+        wv_option3.setLineSpacingMultiplier(lineSpacingMultiplier);
 
     }
 
@@ -287,6 +324,7 @@ public class WheelOptions<T> {
         wv_option3.setCyclic(cyclic3);
     }
 
+
     /**
      * 返回当前选中的结果对应的位置数组 因为支持三级联动效果，分三个级别索引，0，1，2。
      * 在快速滑动未停止时，点击确定按钮，会进行判断，如果匹配数据越界，则设为0，防止index出错导致崩溃。
@@ -342,9 +380,8 @@ public class WheelOptions<T> {
      * @param lineSpacingMultiplier
      */
     public void setLineSpacingMultiplier(float lineSpacingMultiplier) {
-        wv_option1.setLineSpacingMultiplier(lineSpacingMultiplier);
-        wv_option2.setLineSpacingMultiplier(lineSpacingMultiplier);
-        wv_option3.setLineSpacingMultiplier(lineSpacingMultiplier);
+        this.lineSpacingMultiplier = lineSpacingMultiplier;
+        setLineSpacingMultiplier();
     }
 
     /**
@@ -353,9 +390,8 @@ public class WheelOptions<T> {
      * @param dividerColor
      */
     public void setDividerColor(int dividerColor) {
-        wv_option1.setDividerColor(dividerColor);
-        wv_option2.setDividerColor(dividerColor);
-        wv_option3.setDividerColor(dividerColor);
+        this.dividerColor = dividerColor;
+        setDividerColor();
     }
 
     /**
@@ -364,9 +400,8 @@ public class WheelOptions<T> {
      * @param dividerType
      */
     public void setDividerType(WheelView.DividerType dividerType) {
-        wv_option1.setDividerType(dividerType);
-        wv_option2.setDividerType(dividerType);
-        wv_option3.setDividerType(dividerType);
+        this.dividerType = dividerType;
+        setDividerType();
     }
 
     /**
@@ -375,9 +410,8 @@ public class WheelOptions<T> {
      * @param textColorCenter
      */
     public void setTextColorCenter(int textColorCenter) {
-        wv_option1.setTextColorCenter(textColorCenter);
-        wv_option2.setTextColorCenter(textColorCenter);
-        wv_option3.setTextColorCenter(textColorCenter);
+        this.textColorCenter = textColorCenter;
+        setTextColorCenter();
     }
 
     /**
@@ -386,9 +420,8 @@ public class WheelOptions<T> {
      * @param textColorOut
      */
     public void setTextColorOut(int textColorOut) {
-        wv_option1.setTextColorOut(textColorOut);
-        wv_option2.setTextColorOut(textColorOut);
-        wv_option3.setTextColorOut(textColorOut);
+        this.textColorOut = textColorOut;
+        setTextColorOut();
     }
 
     /**
@@ -396,6 +429,7 @@ public class WheelOptions<T> {
      *
      * @param isCenterLabel
      */
+
     public void isCenterLabel(boolean isCenterLabel) {
         wv_option1.isCenterLabel(isCenterLabel);
         wv_option2.isCenterLabel(isCenterLabel);
@@ -408,22 +442,5 @@ public class WheelOptions<T> {
 
     public void setLinkage(boolean linkage) {
         this.linkage = linkage;
-    }
-
-    /**
-     * 设置最大可见数目
-     *
-     * @param itemsVisible 建议设置为 3 ~ 9之间。
-     */
-    public void setItemsVisible(int itemsVisible) {
-        wv_option1.setItemsVisibleCount(itemsVisible);
-        wv_option2.setItemsVisibleCount(itemsVisible);
-        wv_option3.setItemsVisibleCount(itemsVisible);
-    }
-
-    public void setAlphaGradient(boolean isAlphaGradient) {
-        wv_option1.setAlphaGradient(isAlphaGradient);
-        wv_option2.setAlphaGradient(isAlphaGradient);
-        wv_option3.setAlphaGradient(isAlphaGradient);
     }
 }
