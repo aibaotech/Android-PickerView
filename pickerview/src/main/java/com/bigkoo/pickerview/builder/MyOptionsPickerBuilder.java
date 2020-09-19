@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorInt;
+import android.support.annotation.ColorInt;
 
 import com.bigkoo.pickerview.configure.MyPickerOptions;
 import com.bigkoo.pickerview.configure.PickerOptions;
