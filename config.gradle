@@ -1,0 +1,19 @@
+ext {
+
+    //是否使用aar
+    isUseAAR = false
+
+    //android开发版本配置
+    versions = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.3",
+            minSdkVersion    : 21,//android 5.0
+            targetSdkVersion : 28,
+    ]
+
+
+
+
+}
+
+
