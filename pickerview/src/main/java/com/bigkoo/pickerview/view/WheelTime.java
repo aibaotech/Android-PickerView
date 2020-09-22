@@ -925,4 +925,15 @@ public class WheelTime {
     public void setSelectChangeCallback(ISelectTimeCallback mSelectChangeCallback) {
         this.mSelectChangeCallback = mSelectChangeCallback;
     }
+    /**
+     * @param itemsVisibleCount 设置显示中项数量
+     */
+    public void setItemsVisibleCount(int itemsVisibleCount){
+        wv_day.setItemsVisibleCount(itemsVisibleCount);
+        wv_month.setItemsVisibleCount(itemsVisibleCount);
+        wv_year.setItemsVisibleCount(itemsVisibleCount);
+        wv_hours.setItemsVisibleCount(itemsVisibleCount);
+        wv_minutes.setItemsVisibleCount(itemsVisibleCount);
+        wv_seconds.setItemsVisibleCount(itemsVisibleCount);
+    }
 }

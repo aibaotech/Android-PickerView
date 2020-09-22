@@ -443,4 +443,14 @@ public class WheelOptions<T> {
     public void setLinkage(boolean linkage) {
         this.linkage = linkage;
     }
+
+
+    /**
+     * @param itemsVisibleCount 设置显示中项数量
+     */
+    public void setItemsVisibleCount(int itemsVisibleCount){
+        wv_option1.setItemsVisibleCount(itemsVisibleCount);
+        wv_option2.setItemsVisibleCount(itemsVisibleCount);
+        wv_option3.setItemsVisibleCount(itemsVisibleCount);
+    }
 }

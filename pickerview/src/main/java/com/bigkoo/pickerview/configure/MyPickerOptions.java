@@ -116,4 +116,5 @@ public class MyPickerOptions {
     public Typeface font = Typeface.MONOSPACE;//字体样式
     public WheelView.DividerType dividerType = WheelView.DividerType.FILL;//分隔线类型
 
+    public int itemsVisibleCount=5;//显示行数
 }

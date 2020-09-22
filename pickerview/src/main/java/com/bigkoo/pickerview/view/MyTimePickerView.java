@@ -42,7 +42,7 @@ public class MyTimePickerView<T> extends MyBasePickerView implements View.OnClic
         initAnim();
 
         if (mPickerOptions.customListener == null) {
-            LayoutInflater.from(context).inflate(R.layout.pickerview_time, contentContainer);
+            LayoutInflater.from(context).inflate(mPickerOptions.layoutRes, contentContainer);
 
             //顶部标题
             TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
@@ -137,7 +137,7 @@ public class MyTimePickerView<T> extends MyBasePickerView implements View.OnClic
                 , mPickerOptions.label_hours, mPickerOptions.label_minutes, mPickerOptions.label_seconds);
         wheelTime.setTextXOffset(mPickerOptions.x_offset_year, mPickerOptions.x_offset_month, mPickerOptions.x_offset_day,
                 mPickerOptions.x_offset_hours, mPickerOptions.x_offset_minutes, mPickerOptions.x_offset_seconds);
-
+        wheelTime.setItemsVisibleCount(mPickerOptions.itemsVisibleCount);
         setOutSideCancelable(mPickerOptions.cancelable);
         wheelTime.setCyclic(mPickerOptions.cyclic);
         wheelTime.setDividerColor(mPickerOptions.dividerColor);

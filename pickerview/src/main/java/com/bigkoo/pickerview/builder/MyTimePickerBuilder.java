@@ -304,6 +304,16 @@ public class MyTimePickerBuilder {
         return this;
     }
 
+    //
+    /**
+     * @param itemsVisibleCount 设置显示行数
+     * @return
+     */
+    public MyTimePickerBuilder setItemsVisibleCount(int itemsVisibleCount) {
+        mPickerOptions.itemsVisibleCount = itemsVisibleCount;
+        return this;
+    }
+
     public MyTimePickerView build() {
         return new MyTimePickerView(mPickerOptions);
     }
